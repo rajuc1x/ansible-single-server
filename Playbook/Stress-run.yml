@@ -7,7 +7,7 @@
       package:
         name: stress-ng
         state: present
-  tasks:
+
     - name: Run stress-ng for 60 seconds
       command: stress-ng --cpu 4 --timeout 60s
       async: 65
@@ -21,11 +21,7 @@
       retries: 10
       delay: 10
 
-    - name: Display stress-ng result
-      debug:
-        msg: "Stress-ng completed with result: {{ job_result }}"
-  tasks:
-    - name: save stress-ng result to file
+    - name: save stress-ng output to file
       copy:
-        content: "{{ job_result }}"
-        dest: /tmp/stress-ng-result.txt
+        content: "{{ job_result.stdout }}"
+        dest: /tmp/stress-ng-output.txt
