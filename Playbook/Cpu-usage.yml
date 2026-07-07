@@ -1,0 +1,8 @@
+- name: cup usage
+  hosts: localhost
+  gather_facts: yes
+
+  tasks:
+    - name: Display CPU usage
+      debug:
+        msg: "CPU usage is {{ ansible_processor_cores }} cores"
