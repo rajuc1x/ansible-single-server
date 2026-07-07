@@ -13,14 +13,7 @@
       async: 65
       poll: 0
 
-    - name: Wait for stress-ng to complete
-      async_status:
-        jid: "{{ ansible_job_id }}"
-      register: job_result
-      until: job_result.finished
-      retries: 10
-      delay: 10
-
+    
     - name: save stress-ng output to file
       copy:
         content: "{{ job_result.stdout }}"
