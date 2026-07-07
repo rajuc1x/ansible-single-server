@@ -1,0 +1,16 @@
+- name: check installed all versions
+  hosts: localhost
+  gather_facts: yes
+
+  tasks:
+    - name: Check Ansible version
+      debug:
+        msg: "Ansible version is {{ ansible_version.full }}"
+
+    - name: Check Python version
+      debug:
+        msg: "Python version is {{ ansible_python.version.full }}"
+
+    - name: Check OS version
+      debug:
+        msg: "OS version is {{ ansible_distribution }} {{ ansible_distribution_version }}"
