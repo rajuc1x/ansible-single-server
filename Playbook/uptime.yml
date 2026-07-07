@@ -1,9 +1,9 @@
 ---
 - name: Check server uptime
   hosts: local
-    gather_facts: yes
+  gather_facts: yes
 
-      tasks:
-            - name: Display system uptime
-                  debug:
-                            msg: "Uptime is {{ ansible_uptime_seconds }} seconds ({{ ansible_uptime_seconds | int // 3600 }} hours)"
+  tasks:
+    - name: Display system uptime
+      debug:
+        msg: "Uptime is {{ ansible_uptime_seconds }} seconds"
