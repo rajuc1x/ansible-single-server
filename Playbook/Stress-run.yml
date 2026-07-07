@@ -1,0 +1,31 @@
+- name: install stress-ng
+  hosts: localhost
+  gather_facts: yes
+
+  tasks:
+    - name: Install stress-ng package
+      package:
+        name: stress-ng
+        state: present
+  tasks:
+    - name: Run stress-ng for 60 seconds
+      command: stress-ng --cpu 4 --timeout 60s
+      async: 65
+      poll: 0
+
+    - name: Wait for stress-ng to complete
+      async_status:
+        jid: "{{ ansible_job_id }}"
+      register: job_result
+      until: job_result.finished
+      retries: 10
+      delay: 10
+
+    - name: Display stress-ng result
+      debug:
+        msg: "Stress-ng completed with result: {{ job_result }}"
+  tasks:
+    - name: save stress-ng result to file
+      copy:
+        content: "{{ job_result }}"
+        dest: /tmp/stress-ng-result.txt
