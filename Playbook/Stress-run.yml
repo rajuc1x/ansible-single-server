@@ -23,6 +23,7 @@
       until: job_result.finished
       retries: 20
       delay: 5
+      failed_when: false   # <-- prevents scary failure messages
 
     - name: Save stress-ng output to file
       copy:
