@@ -1,5 +1,5 @@
 - name: ping the server to check connectivity
-  hosts: local hosts
+  hosts: localhost
   tasks:
     - name: ping the server
       ping:
